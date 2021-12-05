@@ -50,6 +50,7 @@ typedef struct s_act
 	int		acts;
 	bool	case_a;
 	bool	case_b;
+	bool	case_c;
 }t_act;
 
 typedef struct s_com
@@ -128,9 +129,10 @@ bool	ft_mini_sort(t_list *com);
 
 /*		ft_sort_stack_utils.c */
 bool	check_sort(t_list *com);
-int		midpoint_alt(t_stack *n, int *arr);
+void	find_mid(int *arr, int min, int max, int *mid);
 int		find_max(t_stack *n);
 int		find_min(t_stack *n);
+void	min_max(t_stack *stack, int *min, int *max);
 
 /*		ft_sort_stack_full.c */
 void	actitons_det(t_list *com, t_node *node, t_act *act);

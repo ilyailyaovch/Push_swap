@@ -6,24 +6,22 @@
 /*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:41:21 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 18:50:52 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/05 19:18:40 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-/* checks if stack A is alltedy sorted  */
-
-bool	check_sort(t_list *com)
+bool	check_sort(t_list *all)
 {
 	int		ct;
 	t_node	*temp;
 
-	temp = com->a.head;
+	temp = all->a.head;
 	ct = -1;
-	while (++ct < com->len)
+	while (++ct < all->len)
 	{
-		if (temp->value != com->arr[ct])
+		if (temp->value != all->arr[ct])
 			return (false);
 		temp = temp->next;
 	}
@@ -61,40 +59,33 @@ int	find_max(t_stack *n)
 	return (ct);
 }
 
-static void	min_max(t_stack *n, int len, int *min, int *max)
+void	min_max(t_stack *stack, int *min, int *max)
 {
-	int		ct;
-	t_node	*temp;
+	t_node	*node;
 
-	ct = -1;
-	temp = n->head;
-	*min = temp->value;
-	*max = temp->value;
-	while (++ct < len)
+	node = stack->head;
+	*min = node->value;
+	*max = node->value;
+	while (node)
 	{
-		if (temp->value < *min)
-			*min = temp->value;
-		if (temp->value > *max)
-			*max = temp->value;
-		temp = temp->next;
+		if (node->value < *min)
+			*min = node->value;
+		if (node->value > *max)
+			*max = node->value;
+		node = node->next;
 	}
 }
 
-int	midpoint_alt(t_stack *n, int *arr)
+void	find_mid(int *arr, int min, int max, int *mid)
 {
-	int	min;
-	int	max;
-	int	len;
 	int	i;
 	int	j;
 
-	len = n->size;
-	min_max(n, len, &min, &max);
 	i = 0;
 	while (arr[i] != min)
-		++i;
+		i++;
 	j = i;
 	while (arr[j] != max)
-		++j;
-	return (arr[(j - i) / 2 + i]);
+		j++;
+	*mid = arr[(j - i) / 2 + i];
 }

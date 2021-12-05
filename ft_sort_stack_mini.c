@@ -6,61 +6,52 @@
 /*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:40:36 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 18:52:24 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/05 19:28:44 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-static bool	sort_three_add(t_list *com, int min, int mid)
+static bool	sort_three_first_mid(t_list *all, int max)
 {
-	if (com->a.head->next->value == min && com->a.tail->value == mid)
+	if (all->a.head->next->value == max)
 	{
-		if (!(rotate_a(com)))
-			return (com);
-		return (true);
-	}
-	else if (com->a.head->value == min && com->a.tail->value == mid)
-	{
-		if (!(rev_rotate_a(com)))
+		if (rev_rotate_a(all) == false)
 			return (false);
-		if (!(swap_a(com)))
-			return (false);
-		return (true);
-	}
-	else if (com->a.head->value == mid && com->a.head->next->value == min)
-	{
-		if (!(swap_a(com)))
-			return (false);
-		return (true);
 	}
 	else
-		return (true);
+	{
+		if (swap_a(all) == false)
+			return (false);
+	}
+	return (true);
 }
 
-static bool	sort_three(t_list *com)
+static bool	sort_three(t_list *all)
 {
 	int	min;
+	int	max;
 	int	mid;
 
-	mid = midpoint_alt(&com->a, com->arr);
-	min = find_min(&com->a);
-	if (com->a.head->value == mid && com->a.tail->value == min)
+	min_max(&all->a, &min, &max);
+	find_mid(all->arr, min, max, &mid);
+	if (all->a.head->value == max)
 	{
-		if (!(rev_rotate_a(com)))
+		if (rotate_a(all) == false)
 			return (false);
-		return (true);
 	}
-	else if (com->a.head->next->value == mid && com->a.tail->value == min)
+	if (all->a.head->value == mid)
 	{
-		if (!(swap_a(com)))
-			return (false);
-		if (!(rev_rotate_a(com)))
-			return (false);
-		return (true);
+		return (sort_three_first_mid(all, max));
 	}
-	else
-		return (sort_three_add(com, min, mid));
+	if (all->a.head->next->value == max)
+	{
+		if (rev_rotate_a(all) == false)
+			return (false);
+		if (swap_a(all) == false)
+			return (false);
+	}
+	return (true);
 }
 
 static bool	min_to_b(t_list *com, int min)

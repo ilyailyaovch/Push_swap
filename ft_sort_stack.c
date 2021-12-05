@@ -6,7 +6,7 @@
 /*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 16:03:03 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 18:52:06 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/05 19:06:52 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,28 @@ static void	sort_stack_add(t_list *all)
 		push_a(all);
 }
 
-bool	sort_stack(t_list *com)
+bool	sort_stack(t_list *all)
 {
 	t_act	act;
 
-	if (check_sort(com))
+	if (check_sort(all))
 		return (true);
-	if (com->a.size == 2)
-		return (swap_a(com));
-	if (com->a.size < 6)
-		return (ft_mini_sort(com));
-	ft_sort_utils(com);
-	while (com->a.size > 3)
+	if (all->a.size == 2)
+		return (swap_a(all));
+	if (all->a.size < 6)
+		return (ft_mini_sort(all));
+	ft_sort_utils(all);
+	while (all->a.size > 3)
 	{
-		act = determine_best(com);
+		act = determine_best(all);
 		if (act.case_a)
-			case_a(com, &act);
+			case_a(all, &act);
 		else if (act.case_b)
-			case_b(com, &act);
+			case_b(all, &act);
 		else
-			case_c(com, &act);
-		push_b(com);
+			case_c(all, &act);
+		push_b(all);
 	}
-	sort_stack_add(com);
+	sort_stack_add(all);
 	return (true);
 }

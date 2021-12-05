@@ -6,7 +6,7 @@
 /*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:39:48 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 17:40:22 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/05 19:06:40 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	count_ra(t_node *target, t_stack *n)
 
 /* addition fun for count_rb(finds place of max in B stack*/
 
-static int	count_rb_add(t_list *com)
+static int	count_rb_add(t_list *all)
 {
 	int		rb;
 	t_node	*temp;
 
 	rb = 0;
-	temp = com->b.head;
-	while (temp->place != com->b.max)
+	temp = all->b.head;
+	while (temp->place != all->b.max)
 	{
 		++rb;
 		temp = temp->next;
@@ -48,19 +48,19 @@ static int	count_rb_add(t_list *com)
 
 /* finds number of rev b to place node in valid place*/
 
-int	count_rb(t_list *com, t_node *node)
+int	count_rb(t_list *all, t_node *node)
 {
 	int		ct;
 	int		rb;
 	int		max;
 	t_node	*temp;
 
-	temp = com->b.head;
+	temp = all->b.head;
 	if (!temp)
 		return (0);
 	rb = -1;
 	ct = 0;
-	max = com->max;
+	max = all->max;
 	while (temp)
 	{
 		++ct;
@@ -72,9 +72,9 @@ int	count_rb(t_list *com, t_node *node)
 		temp = temp->next;
 	}
 	if (rb == -1)
-		return (count_rb_add(com));
+		return (count_rb_add(all));
 	else
-		return (rb % com->b.size);
+		return (rb % all->b.size);
 }
 
 /* determin best case after comparing actions*/
@@ -95,4 +95,6 @@ void	count_actions(t_act *act)
 		act->case_a = true;
 	else if (act->acts == c)
 		act->case_b = true;
+	else
+		act->case_c = true;
 }

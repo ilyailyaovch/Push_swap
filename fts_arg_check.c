@@ -6,29 +6,31 @@
 /*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 16:20:21 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 18:17:36 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/05 19:24:04 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 
-bool	ft_check_integer(char *line) //
+bool	ft_check_integer(char *s)
 {
-	int	c;
+	int	coun;
+	int	len;
 
-	c = 0;
-	if (*line == '-')
-		++line;
-	if (*line == '\0')
+	len = 0;
+	coun = 0;
+	if (s[coun] == '-')
+		coun++;
+	if (s[coun] == '\0')
 		return (false);
-	while (*line)
+	while (s[coun])
 	{
-		if (*line < '0' || *line > '9')
+		if (s[coun] < '0' || s[coun] > '9')
 			return (false);
-		++line;
-		++c;
+		coun++;
+		len++;
 	}
-	if (c > 10)
+	if (len > 10)
 		return (false);
 	return (true);
 }
