@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fts_arg_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pleoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 16:20:21 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 19:24:04 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/08 11:24:38 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,21 @@ bool	ft_check_char(char **argv, int argc)
 	return (true);
 }
 
-bool	ft_char_to_arr(char **argv, t_list *com)
+bool	ft_char_to_arr(char **argv, t_list *all)
 {
 	int		c;
 	long	num;
 
 	c = -1;
-	com->arr = malloc(sizeof(int) * com->len);
-	if (com->arr == NULL)
+	all->arr = malloc(sizeof(int) * all->len);
+	if (all->arr == NULL)
 		return (false);
-	while (++c < com->len)
+	while (++c < all->len)
 	{
 		num = ft_atoi(argv[c + 1]);
 		if (num > INT_MAX || num < INT_MIN)
 			return (false);
-		com->arr[c] = num;
+		all->arr[c] = num;
 	}
 	return (true);
 }

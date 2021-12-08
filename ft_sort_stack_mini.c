@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_stack_mini.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pleoma <pleoma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pleoma <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:40:36 by pleoma            #+#    #+#             */
-/*   Updated: 2021/12/05 19:35:06 by pleoma           ###   ########.fr       */
+/*   Updated: 2021/12/08 11:31:05 by pleoma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,60 +54,60 @@ static bool	sort_three(t_list *all)
 	return (true);
 }
 
-static bool	min_to_b(t_list *com, int min)
+static bool	min_to_b(t_list *all, int min)
 {
-	if (com->a.tail->value == min)
+	if (all->a.tail->value == min)
 	{
-		if (!(rev_rotate_a(com)))
+		if (rev_rotate_a(all) == false)
 			return (false);
-		if (!(push_b(com)))
+		if (push_b(all) == false)
 			return (false);
 	}
-	else if (com->a.tail->prev->value == min)
+	else if (all->a.tail->prev->value == min)
 	{
-		if (!(rev_rotate_a(com)))
+		if (rev_rotate_a(all) == false)
 			return (false);
-		if (!(rev_rotate_a(com)))
+		if (rev_rotate_a(all) == false)
 			return (false);
-		if (!(push_b(com)))
+		if (push_b(all) == false)
 			return (false);
 	}
 	else
 	{
-		while (com->a.head->value != min)
-			if (!(rotate_a(com)))
+		while (all->a.head->value != min)
+			if (rotate_a(all) == false)
 				return (false);
-		if (!(push_b(com)))
+		if (push_b(all) == false)
 			return (false);
 	}
 	return (true);
 }
 
-bool	ft_mini_sort(t_list *com)
+bool	ft_mini_sort(t_list *all)
 {
-	if (com->a.size == 5)
+	if (all->a.size == 5)
 	{
-		if (!(min_to_b(com, find_min(&com->a))))
+		if (!(min_to_b(all, find_min(&all->a))))
 			return (false);
-		if (!(min_to_b(com, find_min(&com->a))))
+		if (!(min_to_b(all, find_min(&all->a))))
 			return (false);
-		if (!(sort_three(com)))
+		if (!(sort_three(all)))
 			return (false);
-		if (!(push_a(com)))
+		if (!(push_a(all)))
 			return (false);
-		if (!(push_a(com)))
+		if (!(push_a(all)))
 			return (false);
 	}
-	else if (com->a.size == 4)
+	else if (all->a.size == 4)
 	{
-		if (!(min_to_b(com, find_min(&com->a))))
+		if (!(min_to_b(all, find_min(&all->a))))
 			return (false);
-		if (!(sort_three(com)))
+		if (!(sort_three(all)))
 			return (false);
-		if (!(push_a(com)))
+		if (!(push_a(all)))
 			return (false);
 	}
-	else if (!(sort_three(com)))
+	else if (!(sort_three(all)))
 		return (false);
 	return (true);
 }
